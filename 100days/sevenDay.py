@@ -2,9 +2,69 @@
 import random # import the random module
 word_list = ["aardvark", "baboon", "camel"] # declare the list of the words used
 
-game_over = False
+# list with all the ascii art for the different stages of the game.
+# changes in base of how many lives are left
+stages = ['''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ / \  |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+ /    |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|\  |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+ /|   |
+      |
+      |
+=========''', '''
+  +---+
+  |   |
+  O   |
+  |   |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+  O   |
+      |
+      |
+      |
+=========
+''', '''
+  +---+
+  |   |
+      |
+      |
+      |
+      |
+=========
+''']
+
+game_over = False # sets if the game is over or not. Default if False
 chosen_word = random.choice(word_list) # choose a random word from the list
 word_length = len(chosen_word) # store the length of the random word
+lives = 6 # declare how many lives 
 
 display = [] # make a blank list
 # append a '_' to the list, with length
