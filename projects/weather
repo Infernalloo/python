@@ -1,0 +1,24 @@
+import random
+import tkinter as tk
+from tkinter import ttk
+import python_weather
+import asyncio
+import os
+
+async def getweather() :
+    async with python_weather.Client(unit=python_weather.METRIC) as client :
+        weather = await client.get("Rome")
+
+print(weather.current.temperature)
+
+# window
+window = tk.Tk()
+window.title("Weather")
+window.geometry("640x480")
+
+
+
+
+
+# run
+window.mainloop()
