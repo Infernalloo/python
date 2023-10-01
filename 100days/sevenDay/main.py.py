@@ -1,67 +1,13 @@
- 
 import random # import the random module
+import os
+# import the different variables from the modules
+from hangman_art import stages
+from hangman_art import logo
+from hangman_words import word_list
 
-# list with all the ascii art for the different stages of the game.
-# changes in base of how many lives are left
-stages = ['''
-  +---+
-  |   |
-  O   |
- /|\  |
- / \  |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
- /    |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|\  |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
- /|   |
-      |
-      |
-=========''', '''
-  +---+
-  |   |
-  O   |
-  |   |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-  O   |
-      |
-      |
-      |
-=========
-''', '''
-  +---+
-  |   |
-      |
-      |
-      |
-      |
-=========
-''']
+print(logo) # print the logo for the game
 
 game_over = False # sets if the game is over or not. Default if False
-word_list = ["aardvark", "baboon", "camel"] # declare the list of the words used
 chosen_word = random.choice(word_list) # choose a random word from the list
 word_length = len(chosen_word) # store the length of the random word
 lives = 6 # declare how many lives 
@@ -78,6 +24,12 @@ for blank in range(word_length) :
 while not game_over :
     guess = input("Guess a letter:\n> ").lower() # ask the user for a letter and makes it lower case
     
+    os.system("cls")
+
+    # check if the user already guessed that word
+    if guess in display :
+        print("You already guessed this letter.")
+
     # we use range here so the variable position instead of a 
     # str gets a int, then we store the letter in the letter variable,
     # we compare the letter against the guess and if they are
@@ -86,8 +38,10 @@ while not game_over :
         letter = chosen_word[position]
         if letter == guess :
             display[position] = letter
+            print(f"Lives: {lives}.")
 
-    if letter != guess :
+    if guess not in chosen_word :
+        print(f"The letter {guess} is not in the word.\n Lives: {lives}.")
         lives -= 1
         if lives == 0 :
             game_over = True
