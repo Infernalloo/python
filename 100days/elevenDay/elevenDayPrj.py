@@ -1,6 +1,6 @@
 import random
-from os import clear
-from art import logo
+import os
+import art
 
 
 cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
@@ -44,7 +44,7 @@ def compare(user_score, computer_score):
 
 
 def blackjack() :
-    print(logo)
+    print(art.logo)
     
     game_over = False
     user_cards = []
@@ -82,7 +82,7 @@ def blackjack() :
 restart = input("Do you want to play another match? Yes or No?").lower()
 
 while restart == "y" :
-    clear()
+    os.system("clear")
     blackjack()
 
 
