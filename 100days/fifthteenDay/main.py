@@ -4,7 +4,7 @@ power_off = False
 
 def check_sufficient_resources(drink_ingredients):
 	for item in resources:
-		if resources[item] > drink_ingredients[item]:
+		if resources[item] > drink_ingredients['resources'][item]:
 			print("Sorry, we can't make that right now.")
 
 
@@ -17,6 +17,8 @@ while not power_off:
 		print(f"Milk: {resources['milk']}ml")
 		print(f"Coffee: {resources['coffee']}g")
 		print(f"Money: {profit}$")
+		power_off = True
 	else:
 		drink = MENU[user_input]
+		print(drink)
 		check_sufficient_resources(user_input)
