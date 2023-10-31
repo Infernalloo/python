@@ -1,12 +1,6 @@
 from resources import *
+from logic import *
 power_off = False
-
-
-def check_sufficient_resources(drink_ingredients):
-	for item in resources:
-		if resources[item] > drink_ingredients['resources'][item]:
-			print("Sorry, we can't make that right now.")
-
 
 while not power_off:
 	user_input = input("What do you want to drink? espresso/latte/cappuccino > ").lower()
@@ -21,4 +15,4 @@ while not power_off:
 	else:
 		drink = MENU[user_input]
 		print(drink)
-		check_sufficient_resources(user_input)
+		insert_coins()
