@@ -1,0 +1,22 @@
+from resources import *
+power_off = False
+
+
+def check_sufficient_resources(drink_ingredients):
+	for item in resources:
+		if resources[item] > drink_ingredients[item]:
+			print("Sorry, we can't make that right now.")
+
+
+while not power_off:
+	user_input = input("What do you want to drink? espresso/latte/cappuccino > ").lower()
+	if user_input == "off":
+		power_off = True
+	elif user_input == "report":
+		print(f"Water: {resources['water']}ml")
+		print(f"Milk: {resources['milk']}ml")
+		print(f"Coffee: {resources['coffee']}g")
+		print(f"Money: {profit}$")
+	else:
+		drink = MENU[user_input]
+		check_sufficient_resources(user_input)
