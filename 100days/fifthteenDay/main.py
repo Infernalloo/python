@@ -19,5 +19,4 @@ while not power_off:
         print(f"Money: {profit}$")
     else:
         drink = MENU[user_input]
-        print(drink)
         check_resources
