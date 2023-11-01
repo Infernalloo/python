@@ -15,4 +15,5 @@ while not power_off:
 	else:
 		drink = MENU[user_input]
 		print(drink)
+		check_sufficient_resources(drink)
 		insert_coins()

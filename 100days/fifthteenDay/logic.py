@@ -1,10 +1,11 @@
 from resources import *
 
 
-# def check_sufficient_resources(drink_ingredients):
-# 	for item in resources:
-# 		if resources[item] > drink_ingredients['resources'][item]:
-# 			print("Sorry, we can't make that right now.")
+def check_sufficient_resources(drink_resources):
+	for item in resources:
+		if resources[item] <= drink_resources['ingredients'][item]:
+			return f"Sorry, we don't have enough {item}"
+
 			
 
 def insert_coins():
