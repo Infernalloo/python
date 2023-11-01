@@ -1,4 +1,3 @@
-from resources import *
 power_off = False
 
 MENU = {
@@ -36,9 +35,11 @@ profit = 0
 
 
 def check_sufficient_resources(drink_resources):
-	for item in resources:
-		if resources[item] <= drink_resources['ingredients'][item]:
-			return f"Sorry, we don't have enough {item}"
+	for item in drink_resources:
+		if resources[item] < drink_resources[item]:
+			print(f"Sorry, there is not enough {item}.")
+			return False
+	return True
 
 
 def insert_coins():
@@ -48,16 +49,26 @@ def insert_coins():
 	pennies = float(input("How many pennies? > ")) * 0.01
 	profit =  round(quarters + dimes + nickels + pennies, 2)
 	print(f"You have inserted ${profit}")
+	return profit
 
 
-def check_transaction(money_import):
+def transaction_check(payment_input, drink_cost):
 	global profit
-	global user_input
-	if profit == MENU[user_input]['cost']:
-		profit += MENU[user_input]['cost']
-	elif profit > MENU[user_input]['cost']:
-		print("Sorry, that's not enough money. Money refounded.")
-		
+	change = round(payment_input - drink_cost, 2)
+	print(f"Here is ${change} in change.")
+	if payment_input >= drink_cost:
+		profit += payment_input - change
+		return True
+	else:
+		print("Sorry, that is not enough money. Money refounded.")
+		return False
+
+
+def make_coffee(drink_name, order_ingredients):
+	for item in order_ingredients:
+		resources[item] -= order_ingredients[item]
+	print(f"Here is your {drink_name}")
+
 
 while not power_off:
 	print(f"Espresso: {MENU['espresso']['cost']}$")
@@ -70,10 +81,11 @@ while not power_off:
 		print(f"Water: {resources['water']}ml")
 		print(f"Milk: {resources['milk']}ml")
 		print(f"Coffee: {resources['coffee']}g")
-		print(f"Money: {profit}$")
-		power_off = True
+		print(f"Money: {round(profit, 2)}$")
 	else:
 		drink = MENU[user_input]
-		check_sufficient_resources(drink)
-		if insert_coins() == True:
-			check_transaction(profit)
+		if check_sufficient_resources(drink['ingredients']):
+			payment = insert_coins()
+			if transaction_check(payment, drink['cost']):
+				make_coffee(user_input, drink['ingredients'])
+
