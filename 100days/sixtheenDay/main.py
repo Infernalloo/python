@@ -21,5 +21,5 @@ while power_on:
         if coffee_maker.is_resource_sufficient(drink):
             if money_machine.make_payment(drink.cost):
                 coffee_maker.make_coffee(drink)
-                power_on = False
-        
+        else:
+            power_on = False
