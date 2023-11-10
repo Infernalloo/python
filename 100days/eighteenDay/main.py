@@ -1,12 +1,19 @@
 from turtle import Turtle, Screen
+import turtle as t
 import random
 # import turtle as t
 
 timmy = Turtle()
+t.colormode(255)
 timmy.shape("turtle")
 colors = ["OliveDrab", "Olive", "RoyalBlue", "Chocolate", "Indigo", "PaleVioletRed", "SlateGray", "DarkSeaGreen4"]
 angles = [0, 90, 180, 270]
-timmy.speed("fast")
+timmy.speed("fastest")
+
+# Tuple
+# like a list, but immutable,
+# can't be changed
+#my_tuple = (1 ,3 ,8)
 
 
 def draw_square():
@@ -70,15 +77,32 @@ def draw_shape(num_side):
         timmy.color(random.choice(colors))
 
 
+def random_color():
+    red = random.randint(0, 256)
+    green = random.randint(0, 256)
+    blue = random.randint(0, 256)
+    rand_color_tuple = (red, green, blue)
+    return rand_color_tuple
+
+
 def random_walk():
     timmy.width(15)
     for _ in range(500):
         angle = random.choice(angles)
         timmy.setheading(angle)
         timmy.fd(100)
-        timmy.color(random.choice(colors))
+        timmy.color(random_color())
 
 
-random_walk()
+def spirograph(circle_num, tilt):
+    angle = 360
+    for degree in range(0, circle_num):
+        timmy.circle(100)
+        timmy.setheading(angle)
+        timmy.color(random_color())
+        angle -= tilt
+
+
+spirograph(36, 10)
 screen = Screen()
 screen.exitonclick()
