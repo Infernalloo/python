@@ -13,25 +13,30 @@ import random
 #
 # print(color_tuples)
 
-colors_list = [(239, 241, 245), (208, 160, 111), (188, 168, 17), (32, 105, 142), (173, 82, 29), (13, 51, 84),
+colors_list = [(208, 160, 111), (188, 168, 17), (32, 105, 142), (173, 82, 29), (13, 51, 84),
                (142, 174, 195), (217, 209, 123), (158, 23, 13), (195, 142, 157), (144, 68, 102), (94, 161, 80)]
 timmy = turtle.Turtle()
 turtle.colormode(255)
 timmy.shape("turtle")
+timmy.speed("fastest")
+timmy.penup()
+timmy.ht()
+num_dots = 100
 
+timmy.setheading(225)
+timmy.fd(300)
+timmy.setheading(0)
 
-def draw_line():
-    for _ in range(10):
-        timmy.dot(20, random.choice(colors_list))
-        timmy.fd(50)
-
-
-for _ in range(5):
-    draw_line()
-    timmy.setheading(90)
+for dot_count in range(1, num_dots + 1):
+    timmy.dot(20, random.choice(colors_list))
     timmy.fd(50)
-    timmy.setheading(180)
-    draw_line()
+
+    if dot_count % 10 == 0:
+        timmy.setheading(90)
+        timmy.fd(50)
+        timmy.setheading(180)
+        timmy.fd(500)
+        timmy.seth(0)
 
 screen = turtle.Screen()
 screen.exitonclick()
