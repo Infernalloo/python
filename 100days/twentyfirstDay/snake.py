@@ -3,7 +3,7 @@ from turtle import Turtle
 # because it's a const, so it's never
 # going to change, and so we use this
 # format, so we can recognize it
-STARTING_XCOR = [0, -20, -40]
+STARTING_POSITION = [0, -20, -40]
 MOVE_DISTANCE = 20
 UP = 90
 DOWN = 270
@@ -19,12 +19,18 @@ class Snake:
         self.head = self.body_squares[0]
 
     def create_snake(self):
-        for snake_body in range(3):
-            tim = Turtle(shape="square")
-            tim.color("white")
-            tim.penup()
-            tim.goto(x=STARTING_XCOR[snake_body], y=0)
-            self.body_squares.append(tim)
+        for position in range(2):
+            self.add_segment(position)
+
+    def extend(self):
+        self.add_segment(self.body_squares[-1].position())
+
+    def add_segment(self, position):
+        tim = Turtle(shape="square")
+        tim.color("white")
+        tim.penup()
+        tim.goto(x=STARTING_POSITION[position], y=0)
+        self.body_squares.append(tim)
 
     def move(self):
         for body_num in range(len(self.body_squares) - 1, 0, -1):
